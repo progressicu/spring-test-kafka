@@ -135,7 +135,7 @@ class MultipleKafkaTestContainersTest {
 		}
 
 		@Bean("secondConsumerFactory")
-		public ConsumerFactory<String, String> firstConsumerFactory(@Value("${second.kafka.server}") String secondKafkaServer) {
+		public ConsumerFactory<String, String> secondConsumerFactory(@Value("${second.kafka.server}") String secondKafkaServer) {
 			Map<String, Object> props = new HashMap<>();
 			props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, secondKafkaServer);
 			props.put(ConsumerConfig.GROUP_ID_CONFIG, "antkorwin-second-kafka-server-consumer-group");

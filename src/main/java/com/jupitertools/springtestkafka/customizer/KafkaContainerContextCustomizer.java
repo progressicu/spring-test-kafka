@@ -10,6 +10,7 @@ import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextCustomizer;
 import org.springframework.test.context.MergedContextConfiguration;
+import org.testcontainers.utility.DockerImageName;
 
 
 /**
@@ -33,7 +34,8 @@ public class KafkaContainerContextCustomizer implements ContextCustomizer {
 
 		for (String bootstrap : bootstrapProperties) {
 			log.debug("Try to start Kafka TestContainer -> [{}]", bootstrap);
-			KafkaContainer kafka = new KafkaContainer();
+			KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.2.2"));
+			kafka.withReuse(true);
 			kafka.start();
 			log.debug("Started Kafka TestContainer at:[{}]", kafka.getBootstrapServers());
 
